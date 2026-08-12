@@ -41,7 +41,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/share/1E8MwBREmV/" target="_blank" rel="noopener noreferrer" className="text-cream-white/60 hover:text-golden-hour transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-cream-white/60 hover:text-golden-hour transition-colors">
+              <a href="https://www.instagram.com/uwrcafrica" target="_blank" rel="noopener noreferrer" className="text-cream-white/60 hover:text-golden-hour transition-colors">
                 <Instagram size={20} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-cream-white/60 hover:text-golden-hour transition-colors">

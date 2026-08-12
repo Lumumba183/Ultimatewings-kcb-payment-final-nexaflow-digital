@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const images = [
+  { src: '/images/widows-orphans-team.jpg', alt: 'Ultimate Wings team with widows and orphans in the community' },
   { src: '/images/students-assembly.jpg', alt: 'Schoolchildren gathered for an outdoor assembly' },
   { src: '/images/real-school-deliveries.jpg', alt: 'School supplies and books delivered to children' },
   { src: '/images/books-distribution.jpg', alt: 'Young women receiving educational materials' },

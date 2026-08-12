@@ -10,6 +10,15 @@ const categories = ['All', 'Education', 'Empowerment', 'Healthcare', 'Community'
 
 const articles = [
   {
+    id: 13,
+    tag: 'Community',
+    title: 'Pure Religion: Caring for Widows and Orphans',
+    excerpt: 'From James 1:27 to the early church in Acts — God\'s heart for widows and orphans is our mission. Discover the four pillars turning faith into food, skills, and restored dignity.',
+    meta: 'August 12, 2026 • 9 min read',
+    image: '/images/widows-orphans-team.jpg',
+    slug: '/blog/pure-religion-widows-orphans',
+  },
+  {
     id: 1,
     tag: 'Healthcare',
     title: 'Pads Are Not Charity – Menstrual Dignity Is a Right',
@@ -183,22 +192,22 @@ export default function Blog() {
           <div className="bg-white rounded-2xl overflow-hidden shadow-card flex flex-col lg:flex-row">
             <div className="lg:w-1/2">
               <img
-                src="/images/supplies-distribution.jpg"
-                alt="Pads Are Not Charity"
+                src="/images/widows-orphans-team.jpg"
+                alt="Pure Religion: Caring for Widows and Orphans"
                 className="w-full h-full object-cover min-h-[300px] lg:min-h-[400px]"
               />
             </div>
             <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
               <span className="text-label text-golden-hour tracking-[0.15em]">FEATURED STORY</span>
               <h2 className="font-display font-bold text-deep-forest mt-4 leading-tight" style={{ fontSize: 'clamp(28px, 3vw, 40px)' }}>
-                Pads Are Not Charity – Menstrual Dignity Is a Right
+                Pure Religion: Caring for Widows and Orphans
               </h2>
               <p className="text-off-black/70 mt-4 leading-relaxed">
-                Why girls in Kenya miss school — not because of menstruation itself, but because of failed systems. Discover how Ultimate Wings is changing the narrative through sanitary towel distribution and stigma-breaking education.
+                Scripture is clear — pure religion looks after orphans and widows in their distress. Discover the four practical pillars through which Ultimate Wings turns that calling into school meals, skills training, mentorship, and restored dignity.
               </p>
-              <span className="text-muted-sage text-sm mt-4">March 15, 2026 &bull; 8 min read</span>
+              <span className="text-muted-sage text-sm mt-4">August 12, 2026 &bull; 9 min read</span>
               <Link
-                to="/blog/pads-are-not-charity"
+                to="/blog/pure-religion-widows-orphans"
                 className="link-arrow text-deep-forest hover:text-golden-hour font-bold underline underline-offset-4 mt-6 inline-flex"
               >
                 Read Full Story <ArrowRight size={16} />

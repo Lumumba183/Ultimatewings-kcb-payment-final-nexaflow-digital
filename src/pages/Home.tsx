@@ -1,4 +1,5 @@
 import HeroSection from '../sections/HeroSection'
+import FaithFeatureSection from '../sections/FaithFeatureSection'
 import AboutSection from '../sections/AboutSection'
 import ProgramsSection from '../sections/ProgramsSection'
 import ImpactSection from '../sections/ImpactSection'
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <FaithFeatureSection />
       <AboutSection />
       <ProgramsSection />
       <ImpactSection />

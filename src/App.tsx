@@ -15,6 +15,7 @@ import ArticlePowerOfEducation from './pages/articles/ArticlePowerOfEducation'
 import ArticleWidowsMicroEnterprise from './pages/articles/ArticleWidowsMicroEnterprise'
 import ArticleSainabuHome from './pages/articles/ArticleSainabuHome'
 import ArticleYearInReview2025 from './pages/articles/ArticleYearInReview2025'
+import ArticleWidowsOrphansCare from './pages/articles/ArticleWidowsOrphansCare'
 import ScrollToTop from './components/ScrollToTop'
 import DonationFloat from './components/DonationFloat'
 import Navbar from './components/Navbar'
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/blog/power-of-education" element={<ArticlePowerOfEducation />} />
           <Route path="/blog/widows-micro-enterprise" element={<ArticleWidowsMicroEnterprise />} />
           <Route path="/blog/sainabu-home" element={<ArticleSainabuHome />} />
+          <Route path="/blog/pure-religion-widows-orphans" element={<ArticleWidowsOrphansCare />} />
           <Route path="/donate" element={<Donate />} />
         </Routes>
       </main>
