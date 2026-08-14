@@ -262,10 +262,10 @@ export default function Donate() {
                   <div className="flex items-center justify-between bg-white rounded-lg p-3">
                     <div>
                       <div className="text-xs text-green-700/70">Account Number</div>
-                      <div className="font-bold text-green-800 text-lg">97000052</div>
+                      <div className="font-bold text-green-800 text-lg">9700052</div>
                     </div>
                     <button
-                      onClick={() => copyToClipboard('97000052', 'account')}
+                      onClick={() => copyToClipboard('9700052', 'account')}
                       className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-100 text-green-700 text-sm hover:bg-green-200 transition-colors"
                     >
                       {copiedField === 'account' ? <Check size={14} /> : <Copy size={14} />}
@@ -305,7 +305,7 @@ export default function Donate() {
                   <li>Select <strong>Lipa na M-Pesa</strong></li>
                   <li>Select <strong>Paybill</strong> or <strong>Buy Goods</strong></li>
                   <li>Enter Business Number <strong>522533</strong> or Till <strong>9700052</strong></li>
-                  <li>Enter Account Number <strong>97000052</strong> (for Paybill)</li>
+                  <li>Enter Account Number <strong>9700052</strong> (for Paybill)</li>
                   <li>Enter Amount: <strong>KSh {amount.toLocaleString()}</strong></li>
                   <li>Enter your M-Pesa PIN and confirm</li>
                 </ol>
