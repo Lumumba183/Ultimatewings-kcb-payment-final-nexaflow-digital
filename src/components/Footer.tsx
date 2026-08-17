@@ -30,9 +30,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div>
-            <div className="flex flex-col mb-4">
-              <span className="font-display font-bold text-xl text-cream-white">ULTIMATE WINGS</span>
-              <span className="text-label text-golden-hour mt-1">KENYA</span>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/images/logo.jpg" 
+                alt="Ultimate Wings Kenya Logo" 
+                className="h-12 w-auto rounded-lg"
+              />
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-xl text-cream-white">ULTIMATE WINGS</span>
+                <span className="text-label text-golden-hour mt-1">KENYA</span>
+              </div>
             </div>
             <p className="text-cream-white/60 text-sm leading-relaxed max-w-[280px]">
               Restoring hope among vulnerable children and communities across Kenya. Building education, empowerment, and healthcare for all.
