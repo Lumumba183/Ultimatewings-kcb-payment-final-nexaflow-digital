@@ -48,6 +48,7 @@ export default function App() {
           <Route path="/blog/sainabu-home" element={<ArticleSainabuHome />} />
           <Route path="/blog/oscar-nyaanga" element={<ArticleOscarNyaanga />} />
           <Route path="/blog/pure-religion-widows-orphans" element={<ArticleWidowsOrphansCare />} />
+          <Route path="/blog/year-in-review-2025" element={<ArticleYearInReview2025 />} />
           <Route path="/donate" element={<Donate />} />
         </Routes>
       </main>

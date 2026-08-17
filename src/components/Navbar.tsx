@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 /* ---------- smooth scroll helper ---------- */
@@ -23,6 +23,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +37,26 @@ export default function Navbar() {
     setMobileOpen(false)
   }, [location.pathname])
 
+  // Handle hash scrolling when arriving at home page with a hash
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      setTimeout(() => {
+        scrollToSection(location.hash)
+      }, 150)
+    }
+  }, [location.pathname, location.hash])
+
   const isHome = location.pathname === '/'
+
+  const handleHashClick = (hash: string) => {
+    if (!isHome) {
+      // Navigate to home first, then scroll
+      navigate('/' + hash)
+    } else {
+      scrollToSection(hash)
+    }
+    setMobileOpen(false)
+  }
 
   return (
     <>
@@ -71,13 +91,7 @@ export default function Navbar() {
               link.hash ? (
                 <button
                   key={link.label}
-                  onClick={() => {
-                    if (!isHome) {
-                      window.location.href = '/' + link.hash
-                    } else {
-                      scrollToSection(link.hash)
-                    }
-                  }}
+                  onClick={() => handleHashClick(link.hash!)}
                   className={`font-body font-medium text-sm uppercase tracking-widest transition-colors duration-300 hover:text-golden-hour bg-transparent border-none cursor-pointer ${
                     isScrolled || !isHome ? 'text-cream-white/80' : 'text-cream-white/80'
                   }`}
@@ -137,14 +151,7 @@ export default function Navbar() {
               link.hash ? (
                 <button
                   key={link.label}
-                  onClick={() => {
-                    setMobileOpen(false)
-                    if (!isHome) {
-                      window.location.href = '/' + link.hash
-                    } else {
-                      setTimeout(() => scrollToSection(link.hash), 300)
-                    }
-                  }}
+                  onClick={() => handleHashClick(link.hash!)}
                   className="font-display font-bold text-3xl text-cream-white hover:text-golden-hour transition-colors bg-transparent border-none cursor-pointer"
                 >
                   {link.label}

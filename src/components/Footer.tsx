@@ -1,11 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail } from 'lucide-react'
+
+const scrollToSection = (id: string) => {
+  const element = document.querySelector(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
 const quickLinks = [
   { label: 'Home', path: '/' },
-  { label: 'About Us', path: '/#about' },
-  { label: 'Our Programs', path: '/#programs' },
-  { label: 'Our Impact', path: '/#impact' },
+  { label: 'About Us', path: '/#about', hash: '#about' },
+  { label: 'Our Programs', path: '/#programs', hash: '#programs' },
+  { label: 'Our Impact', path: '/#impact', hash: '#impact' },
   { label: 'Blog', path: '/blog' },
   { label: 'Contact', path: '/contact' },
 ]
@@ -24,6 +31,12 @@ const legalLinks = [
 ]
 
 export default function Footer() {
+  const navigate = useNavigate()
+
+  const handleHashClick = (hash: string) => {
+    navigate('/' + hash)
+  }
+
   return (
     <footer className="bg-deep-forest text-cream-white">
       <div className="content-max-width mx-auto px-6 lg:px-12 pt-20 pb-10">
@@ -68,12 +81,21 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.path}
-                    className="text-cream-white/60 text-sm hover:text-cream-white hover:translate-x-1 inline-block transition-all"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.hash ? (
+                    <button
+                      onClick={() => handleHashClick(link.hash!)}
+                      className="text-cream-white/60 text-sm hover:text-cream-white hover:translate-x-1 inline-block transition-all bg-transparent border-none cursor-pointer text-left"
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="text-cream-white/60 text-sm hover:text-cream-white hover:translate-x-1 inline-block transition-all"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
