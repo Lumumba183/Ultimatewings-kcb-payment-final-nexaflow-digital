@@ -16,6 +16,7 @@ import ArticleWidowsMicroEnterprise from './pages/articles/ArticleWidowsMicroEnt
 import ArticleSainabuHome from './pages/articles/ArticleSainabuHome'
 import ArticleYearInReview2025 from './pages/articles/ArticleYearInReview2025'
 import ArticleWidowsOrphansCare from './pages/articles/ArticleWidowsOrphansCare'
+import ArticleOscarNyaanga from './pages/articles/ArticleOscarNyaanga'
 import ScrollToTop from './components/ScrollToTop'
 import DonationFloat from './components/DonationFloat'
 import Navbar from './components/Navbar'
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="/blog/power-of-education" element={<ArticlePowerOfEducation />} />
           <Route path="/blog/widows-micro-enterprise" element={<ArticleWidowsMicroEnterprise />} />
           <Route path="/blog/sainabu-home" element={<ArticleSainabuHome />} />
+          <Route path="/blog/oscar-nyaanga" element={<ArticleOscarNyaanga />} />
           <Route path="/blog/pure-religion-widows-orphans" element={<ArticleWidowsOrphansCare />} />
           <Route path="/donate" element={<Donate />} />
         </Routes>

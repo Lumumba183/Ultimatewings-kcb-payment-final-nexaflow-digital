@@ -45,6 +45,38 @@ export default function ArticleSainabuHome() {
             <p className="text-off-black/80 leading-relaxed mb-6">
               Sainabu had known instability for as long as she could remember. After losing her husband to illness, she found herself responsible for two young children with no stable income and no place to call home. They moved between relatives' homes, sleeping in cramped corners, always aware that they were guests who had overstayed their welcome. Her children missed school frequently because they had no consistent place to study, no quiet corner to do homework, and no sense of security that allowed them to focus on learning.
             </p>
+
+            {/* Before/After: Sainabu's Home */}
+            <div className="my-10">
+              <h3 className="font-display font-bold text-xl text-deep-forest mb-6 text-center">A House Becomes a Home</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-card">
+                  <img
+                    src="/images/sainabu-before.jpg"
+                    alt="Sainabu's home before — unstable shelter"
+                    className="w-full h-64 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="bg-red-50 py-3 text-center">
+                    <span className="text-red-700 font-bold text-sm uppercase tracking-widest">Before</span>
+                    <p className="text-red-600/70 text-xs mt-1">Unstable shelter, no security</p>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-card">
+                  <img
+                    src="/images/sainabu-after.jpg"
+                    alt="Sainabu's new home after Ultimate Wings intervention"
+                    className="w-full h-64 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="bg-green-50 py-3 text-center">
+                    <span className="text-green-700 font-bold text-sm uppercase tracking-widest">After</span>
+                    <p className="text-green-600/70 text-xs mt-1">Safe, stable home with dignity</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <p className="text-off-black/80 leading-relaxed mb-6">
               "I would lie awake at night," Sainabu recalls, "wondering what would happen to my children if I got sick. Where would they go? Who would care for them? The uncertainty was heavier than any physical burden."
             </p>

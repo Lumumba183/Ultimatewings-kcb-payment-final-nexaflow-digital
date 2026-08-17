@@ -100,6 +100,15 @@ const articles = [
     slug: '/blog/widows-micro-enterprise',
   },
   {
+    id: 14,
+    tag: 'Healthcare',
+    title: "From Scars to Smiles: Oscar Nyaanga's Journey of Healing",
+    excerpt: 'From a life-threatening accident to a smiling student — Oscar\'s story is a testament to the power of hope, dedicated medical care, and a community that refuses to give up.',
+    meta: 'November 15, 2025 • 6 min read',
+    image: '/images/oscar-after.jpg',
+    slug: '/blog/oscar-nyaanga',
+  },
+  {
     id: 10,
     tag: 'Healthcare',
     title: 'Holistic Healthcare: Healing Bodies and Minds in Underserved Communities',
