@@ -19,7 +19,7 @@ export default function ArticleOscarNyaanga() {
     <div ref={sectionRef} className="min-h-screen bg-warm-cream">
       <section className="relative min-h-[50vh] bg-deep-earth flex items-end overflow-hidden">
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(28,51,40,0.3), rgba(28,51,40,0.95))' }} />
-        <img src="/images/oscar-after.jpg" alt="Oscar Nyaanga healthy and happy in school" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/images/oscar-after.jpg" alt="Oscar Nyaanga healthy and happy in school" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'top center' }} />
         <div className="relative z-10 w-full content-max-width mx-auto px-6 lg:px-12 pb-16 pt-32">
           <div className="article-animate">
             <span className="inline-block bg-golden-hour/20 text-amber-light text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Child Health & Wellness</span>
@@ -57,7 +57,8 @@ export default function ArticleOscarNyaanga() {
                   <img
                     src="/images/oscar-before.jpg"
                     alt="Oscar after the accident — severe burns visible"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-[28rem] object-cover"
+                    style={{ objectPosition: 'top center' }}
                     loading="lazy"
                   />
                   <div className="bg-red-50 py-3 text-center">
@@ -69,7 +70,8 @@ export default function ArticleOscarNyaanga() {
                   <img
                     src="/images/oscar-after.jpg"
                     alt="Oscar healthy and happy back in school"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-[28rem] object-cover"
+                    style={{ objectPosition: 'top center' }}
                     loading="lazy"
                   />
                   <div className="bg-green-50 py-3 text-center">

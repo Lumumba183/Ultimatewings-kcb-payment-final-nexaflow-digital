@@ -54,7 +54,8 @@ export default function ArticleSainabuHome() {
                   <img
                     src="/images/sainabu-before.jpg"
                     alt="Sainabu's home before — unstable shelter"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-[28rem] object-cover"
+                    style={{ objectPosition: 'top center' }}
                     loading="lazy"
                   />
                   <div className="bg-red-50 py-3 text-center">
@@ -66,7 +67,8 @@ export default function ArticleSainabuHome() {
                   <img
                     src="/images/sainabu-after.jpg"
                     alt="Sainabu's new home after Ultimate Wings intervention"
-                    className="w-full h-64 object-cover"
+                    className="w-full h-[28rem] object-cover"
+                    style={{ objectPosition: 'top center' }}
                     loading="lazy"
                   />
                   <div className="bg-green-50 py-3 text-center">
