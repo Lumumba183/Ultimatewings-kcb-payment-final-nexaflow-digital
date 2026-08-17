@@ -129,11 +129,10 @@ const galleryImages = [
   { src: '/images/gallery/housing-06.jpg', alt: 'Sainabu in her new home', category: 'Housing' },
   { src: '/images/gallery/housing-07.jpg', alt: 'Sainabu before new home', category: 'Housing' },
 
-  // Team (7)
+  // Team (6)
   { src: '/images/gallery/team-01.jpg', alt: 'Benson Omondi - Teacher', category: 'Team' },
   { src: '/images/gallery/team-02.jpg', alt: 'Brian Nyongesa - Cook', category: 'Team' },
   { src: '/images/gallery/team-03.jpg', alt: 'Feline Owino - Cleaner', category: 'Team' },
-  { src: '/images/gallery/team-04.jpg', alt: 'James Thoya Baya', category: 'Team' },
   { src: '/images/gallery/team-05.jpg', alt: 'Jennifer Kadi - Teacher', category: 'Team' },
   { src: '/images/gallery/team-06.jpg', alt: 'Samuel Jomo - Gardener', category: 'Team' },
   { src: '/images/gallery/team-07.jpg', alt: 'Sheila Nabwere Okumu', category: 'Team' },

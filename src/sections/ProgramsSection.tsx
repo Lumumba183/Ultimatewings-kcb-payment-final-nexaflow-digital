@@ -24,7 +24,7 @@ const programs = [
   {
     icon: Stethoscope,
     title: 'Mobile Health Clinics',
-    description: 'Bringing essential healthcare directly to underserved communities in Malindi and Nairobi. When hospitals are too far and too expensive, we come to their doorstep.',
+    description: 'Our vision is to purchase fully equipped mobile clinic units to bring essential healthcare directly to underserved communities in Malindi and Nairobi. When hospitals are too far and too expensive, we want to come to their doorstep — but we need your help to make this dream a reality.',
   },
   {
     icon: Sprout,

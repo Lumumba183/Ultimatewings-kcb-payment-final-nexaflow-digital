@@ -22,9 +22,9 @@ export default function ArticleMobileClinics() {
         <img src="/images/blog-healthcare.jpg" alt="Mobile clinic" className="absolute inset-0 w-full h-full object-cover" />
         <div className="relative z-10 w-full content-max-width mx-auto px-6 lg:px-12 pb-16 pt-32">
           <div className="article-animate">
-            <span className="inline-block bg-golden-hour/20 text-amber-light text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Healthcare</span>
+            <span className="inline-block bg-golden-hour/20 text-amber-light text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Healthcare Vision</span>
             <h1 className="font-display font-bold text-cream-white leading-tight" style={{ fontSize: 'clamp(36px, 6vw, 72px)' }}>
-              When the Hospital Is Too Far –<br />Mobile Clinics Bringing Healthcare to Kenya's Doorstep
+              Bringing Healthcare to the Doorstep:<br />Our Vision for Mobile Clinics in Kenya
             </h1>
             <div className="flex flex-wrap items-center gap-6 mt-6 text-cream-white/70 text-sm">
               <span className="flex items-center gap-2"><Calendar size={16} /> January 22, 2026</span>
@@ -46,16 +46,19 @@ export default function ArticleMobileClinics() {
               In communities across <strong>Malindi</strong> and <strong>Nairobi</strong>, healthcare access is not just a medical issue — it is an economic and geographic one. A mother with a sick child faces an impossible choice: spend the family's food budget on transport to a distant clinic, or hope the illness passes on its own.
             </p>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              Too often, families choose the latter. And too often, that choice ends in tragedy.
+              Too often, families choose the latter. And too often, that choice ends in tragedy. Children miss vaccinations. Chronic conditions go unmanaged. Simple infections become severe. And the cycle of poverty deepens with every untreated illness.
             </p>
 
             <blockquote className="border-l-4 border-golden-hour bg-golden-hour/5 rounded-r-xl p-6 my-8 italic text-deep-forest">
               "Hospitals and clinics are far and expensive. For our communities, healthcare is a luxury they cannot afford. We decided to change that."
             </blockquote>
 
-            <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Ultimate Wings Mobile Clinics</h2>
+            <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Our Vision: Mobile Health Clinics</h2>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              Our <strong>mobile health clinics</strong> are fully equipped medical units that travel directly to the communities that need them most. Staffed by qualified healthcare professionals, these clinics provide:
+              At Ultimate Wings Kenya, we believe that <strong>healthcare is a human right</strong> — not a privilege reserved for those who can afford the journey. That is why we are working toward purchasing fully equipped <strong>mobile health clinic units</strong> that will travel directly to the communities that need them most.
+            </p>
+            <p className="text-off-black/80 leading-relaxed mb-6">
+              These mobile clinics will be staffed by qualified healthcare professionals and designed to provide a wide range of essential services right in the heart of underserved areas:
             </p>
             <ul className="list-disc list-inside space-y-2 text-off-black/80 mb-6 ml-4">
               <li><strong>General consultations</strong> — diagnosis and treatment of common illnesses</li>
@@ -66,12 +69,12 @@ export default function ArticleMobileClinics() {
               <li><strong>Medication dispensing</strong> — free essential medicines for those who cannot afford them</li>
             </ul>
 
-            <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Reaching the Unreached</h2>
+            <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Why Mobile Clinics Matter</h2>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              Our mobile clinics operate on a regular schedule, visiting the same communities monthly so that families can plan and trust that help is coming. In Malindi's coastal villages, we have reduced untreated malaria cases by 70%. In Nairobi's informal settlements, our maternal health program has helped hundreds of mothers deliver healthy babies.
+              The impact of mobile healthcare goes far beyond medical treatment. When a community knows that healthcare is coming to them, they feel <strong>seen</strong>. They feel <strong>valued</strong>. They feel <strong>hope</strong>. Parents stop gambling with their children's health. Elders get the medications they need. And the entire community gains a sense of security that transforms daily life.
             </p>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              The impact is not just medical — it is psychological. When a community knows that healthcare is coming to them, they feel seen. They feel valued. They feel hope.
+              In Malindi's coastal villages, where malaria and respiratory infections are common, a mobile clinic could mean the difference between a quick recovery and a life-threatening emergency. In Nairobi's informal settlements, where overcrowding and limited sanitation create constant health risks, regular mobile clinics could protect thousands of families from preventable disease.
             </p>
 
             <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">The Road Ahead</h2>
@@ -79,16 +82,16 @@ export default function ArticleMobileClinics() {
               We dream of a Kenya where no one dies because the hospital was too far. Where every child receives their vaccinations. Where every mother has access to prenatal care. Where chronic diseases are managed, not ignored.
             </p>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              Our mobile clinics are a step toward that dream. But we need your help to expand our reach.
+              But this dream requires resources. Purchasing a mobile clinic unit, equipping it with medical supplies, and staffing it with qualified professionals is a significant investment — one that we cannot make alone. <strong>We need partners. We need supporters. We need you.</strong>
             </p>
 
             <div className="bg-deep-forest rounded-2xl p-8 my-10">
-              <h3 className="font-display font-bold text-xl text-cream-white mb-3">Fund a Mobile Clinic Visit</h3>
+              <h3 className="font-display font-bold text-xl text-cream-white mb-3">Help Us Purchase a Mobile Clinic</h3>
               <p className="text-cream-white/80 mb-6">
-                KSh 15,000 ($120 USD) funds one mobile clinic visit to a rural community — covering fuel, medical supplies, staff allowances, and medications. One visit can serve 150-200 patients.
+                Your donation brings us one step closer to launching mobile healthcare in Kenya. Every contribution counts — whether it's KSh 1,000 or KSh 100,000. Together, we can put a mobile clinic on the road and bring healing to communities that have been waiting far too long.
               </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3 rounded-pill bg-golden-hour text-deep-forest font-bold uppercase tracking-widest text-sm hover:bg-[#D9A33A] transition-all">
-                Support Mobile Healthcare <Heart size={16} />
+              <Link to="/donate" className="inline-flex items-center gap-2 px-8 py-3 rounded-pill bg-golden-hour text-deep-forest font-bold uppercase tracking-widest text-sm hover:bg-[#D9A33A] transition-all">
+                Donate to Mobile Healthcare <Heart size={16} />
               </Link>
             </div>
 

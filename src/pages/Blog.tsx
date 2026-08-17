@@ -48,8 +48,8 @@ const articles = [
   {
     id: 4,
     tag: 'Healthcare',
-    title: 'When the Hospital Is Too Far – Mobile Clinics Bringing Healthcare to Kenya\'s Doorstep',
-    excerpt: 'Hospitals are far and expensive. Ultimate Wings\' mobile clinics bridge the gap for communities in Malindi and Nairobi.',
+    title: 'Bringing Healthcare to the Doorstep: Our Vision for Mobile Clinics in Kenya',
+    excerpt: 'Hospitals are far and expensive. Ultimate Wings Kenya is working toward purchasing mobile clinic units to bring healthcare to communities in Malindi and Nairobi.',
     meta: 'January 22, 2026 • 6 min read',
     image: '/images/blog-healthcare.jpg',
     slug: '/blog/mobile-clinics-healthcare',

@@ -34,7 +34,7 @@ export default function DonationFloat() {
           </div>
         </div>
         <p className="text-cream-white/70 text-xs leading-relaxed mb-3">
-          Help us keep 63+ children in school, empower 100+ widows, and bring healthcare to communities in need.
+          Help us keep 63+ children in school, empower 100+ widows, and expand healthcare access to communities in need.
         </p>
         <Link
           to="/donate"

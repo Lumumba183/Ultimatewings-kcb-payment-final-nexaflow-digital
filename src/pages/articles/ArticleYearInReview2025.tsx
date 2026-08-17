@@ -57,10 +57,6 @@ export default function ArticleYearInReview2025() {
                 <p className="text-off-black/80 mt-2">Widows empowered through vocational training and micro-enterprise</p>
               </div>
               <div className="bg-deep-forest/5 rounded-xl p-6">
-                <span className="font-display font-bold text-4xl text-golden-hour">12</span>
-                <p className="text-off-black/80 mt-2">Mobile health clinics conducted in Malindi and Nairobi communities</p>
-              </div>
-              <div className="bg-deep-forest/5 rounded-xl p-6">
                 <span className="font-display font-bold text-4xl text-golden-hour">5,000+</span>
                 <p className="text-off-black/80 mt-2">Sanitary towel packs distributed to schoolgirls across Kenya</p>
               </div>
@@ -106,7 +102,7 @@ export default function ArticleYearInReview2025() {
 
             <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Expanding Our Reach</h2>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              This year marked our expansion into two new communities in Nairobi's informal settlements. What started as a small pilot program in Kibera has grown into a thriving network of 25 sponsored children, 15 widows in table banking groups, and a community health partnership that brings monthly mobile clinics to over 300 residents.
+              This year marked our expansion into two new communities in Nairobi's informal settlements. What started as a small pilot program in Kibera has grown into a thriving network of 25 sponsored children, 15 widows in table banking groups, and a community health partnership that connects families with local clinics and healthcare providers.
             </p>
             <p className="text-off-black/80 leading-relaxed mb-6">
               We also deepened our commitment to menstrual health, distributing sanitary supplies and conducting dignity workshops in 8 schools. The result? A 40% reduction in girls missing school during their periods — a statistic that translates directly into brighter futures.
@@ -114,7 +110,7 @@ export default function ArticleYearInReview2025() {
 
             <h2 className="font-display font-bold text-2xl text-deep-forest mt-10 mb-4">Looking Ahead: Our Vision for 2026</h2>
             <p className="text-off-black/80 leading-relaxed mb-6">
-              As we step into 2026, our ambitions are bolder. We aim to enroll 30 additional children in school, graduate 20 more young adults, and expand our widows' empowerment program to reach 50 new women. We plan to build 12 new houses, conduct 20 mobile health clinics, and distribute 10,000 sanitary towel packs.
+              As we step into 2026, our ambitions are bolder. We aim to enroll 30 additional children in school, graduate 20 more young adults, and expand our widows' empowerment program to reach 50 new women. We plan to build 12 new houses, purchase mobile clinic equipment to bring healthcare directly to underserved communities, and distribute 10,000 sanitary towel packs.
             </p>
             <p className="text-off-black/80 leading-relaxed mb-6">
               But beyond the numbers, our vision is deeper. We want to build a Kenya where no child is kept from school because of poverty. Where no widow is left destitute because of loss. Where every community has the resources and knowledge to care for its own. That is the Ultimate Wings dream — and in 2026, we intend to fly closer to it than ever before.
