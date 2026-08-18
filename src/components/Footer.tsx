@@ -138,6 +138,10 @@ export default function Footer() {
                 <Mail size={18} className="text-teal-accent flex-shrink-0" />
                 <a href="mailto:info@ultimatewings.co.ke" className="text-golden-hour text-sm hover:underline">info@ultimatewings.co.ke</a>
               </div>
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-teal-accent flex-shrink-0" />
+                <a href="mailto:uwrcafrica@gmail.com" className="text-golden-hour text-sm hover:underline">uwrcafrica@gmail.com</a>
+              </div>
             </div>
           </div>
         </div>

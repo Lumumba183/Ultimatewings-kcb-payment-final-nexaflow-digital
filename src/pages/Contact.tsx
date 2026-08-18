@@ -243,6 +243,10 @@ export default function Contact() {
                   <Mail size={20} className="text-teal-accent flex-shrink-0" />
                   <a href="mailto:uwrcafrica@gmail.com" className="text-golden-hour hover:underline">uwrcafrica@gmail.com</a>
                 </div>
+                <div className="flex items-center gap-4">
+                  <Mail size={20} className="text-teal-accent flex-shrink-0" />
+                  <a href="mailto:info@ultimatewings.co.ke" className="text-golden-hour hover:underline">info@ultimatewings.co.ke</a>
+                </div>
               </div>
             </div>
 
