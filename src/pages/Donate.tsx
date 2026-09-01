@@ -1,10 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { Heart, Lock, CheckCircle, Copy, Check, Phone, MessageCircle, CreditCard, Smartphone, ExternalLink, X } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Heart, Lock, CheckCircle, Copy, Check, Phone, CreditCard, Smartphone, ExternalLink, X } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+
+// Unified Checkout SDK: test vs production asset URL.
+// Controlled by VITE_KCB_ENV in Vercel env vars — defaults to test.
+const KCB_SDK_URL = import.meta.env.VITE_KCB_ENV === 'production'
+  ? 'https://api.cybersource.com/uc/v1/assets/1.0.0/UnifiedCheckout.js'
+  : 'https://apitest.cybersource.com/uc/v1/assets/1.0.0/UnifiedCheckout.js'
 
 const PRESET_AMOUNTS = [
   { value: 1000, label: 'KSh 1,000', desc: 'Feed a child for a week' },
@@ -26,6 +32,7 @@ export default function Donate() {
 
   const sectionRef = useRef<HTMLElement>(null)
   const kcbContainerRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const el = sectionRef.current
@@ -90,28 +97,43 @@ export default function Donate() {
       setKcbConfigured(true)
       setShowKcbModal(true)
 
-      // Load KCB Unified Checkout SDK
+      // Load KCB Unified Checkout SDK (test or production asset per VITE_KCB_ENV)
       const script = document.createElement('script')
-      script.src = 'https://apitest.cybersource.com/uc/v1/assets/1.0.0/UnifiedCheckout.js'
+      script.src = KCB_SDK_URL
+      script.onerror = () => {
+        setKcbError('Could not load the KCB checkout library. Please check your connection and try again.')
+        setShowKcbModal(false)
+      }
       script.onload = async () => {
         try {
           const client = await (window as any).VAS.UnifiedCheckout(data.sessionJWT)
           const checkout = await client.createCheckout({ autoProcessing: true })
           const result = await checkout.mount('#kcb-payment-container')
-          
-          // Send result to server for verification
-          await fetch('/api/payment-verify', {
+
+          // Process the transient token server-side — this is where the
+          // actual payment authorization happens.
+          const verifyRes = await fetch('/api/payment-verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ transientToken: result })
           })
+          const verifyData = await verifyRes.json()
 
           checkout.destroy()
           client.destroy()
           setShowKcbModal(false)
-          alert('Thank you for your donation! Payment successful.')
+
+          if (verifyRes.ok && verifyData.success) {
+            navigate(`/donate/success?ref=${encodeURIComponent(verifyData.transactionId || '')}&amount=${amount}`)
+          } else {
+            navigate('/donate/failed')
+          }
         } catch (err: any) {
-          setKcbError(err.message || 'Payment failed')
+          // Donor cancelled or the SDK errored — back to the form with a message.
+          setShowKcbModal(false)
+          if (err && err.message && !/cancel/i.test(err.message)) {
+            setKcbError(err.message)
+          }
         }
       }
       document.body.appendChild(script)
