@@ -11,19 +11,30 @@
 ### 2. Environment Variables (Vercel Dashboard)
 Add these in Vercel Project Settings → Environment Variables:
 
+#### Site
+```
+SITE_URL=https://your-domain.or.ke    # Public origin, used as Cybersource targetOrigin
+```
+
 #### KCB Payment Gateway (Required for card payments)
+Server-side (used by the /api functions):
 ```
 KCB_MERCHANT_ID=your_kcb_merchant_id
 KCB_API_KEY=your_kcb_api_key
 KCB_API_SECRET=your_kcb_api_secret
 KCB_ENV=test          # Change to 'production' when going live
 ```
+Client-side (selects the test vs production Unified Checkout SDK in the browser):
+```
+VITE_KCB_ENV=test     # Must match KCB_ENV
+```
 
 #### EmailJS (Required for contact form)
+NOTE: this is a Vite app — variables must be prefixed `VITE_` to reach the browser.
 ```
-REACT_APP_EMAILJS_SERVICE_ID=your_emailjs_service_id
-REACT_APP_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
-REACT_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
+VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 ```
 
 ### 3. EmailJS Setup
@@ -41,13 +52,21 @@ REACT_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 
 ### 4. KCB Setup
 1. Get Merchant ID, API Key, and API Secret from KCB bank
-2. Add them to Vercel environment variables
-3. Test in test environment first (`KCB_ENV=test`)
-4. Switch to production when ready (`KCB_ENV=production`)
+2. Add them to Vercel environment variables (server-side AND `VITE_KCB_ENV`)
+3. Test in test environment first (`KCB_ENV=test`, `VITE_KCB_ENV=test`)
+4. Register the webhook URL with KCB: `https://your-domain/api/payment-webhook`
+5. Switch to production when ready (`KCB_ENV=production`, `VITE_KCB_ENV=production`) and redeploy
 
-### 5. Custom Domain (Optional)
+### 5. Important: URL Format
+This app uses HashRouter — all page URLs contain `/#/`:
+- Donation page: `https://your-domain/#/donate`
+- Success page: `https://your-domain/#/donate/success`
+- Failed page: `https://your-domain/#/donate/failed`
+Give these exact formats to KCB when registering redirect URLs.
+
+### 6. Custom Domain (Optional)
 1. In Vercel project settings, add your domain
-2. Update DNS records as instructed by Vercel
+2. Update DNS records as instructed by Vercel (add A + CNAME records; never change nameservers)
 
 ---
 
@@ -55,25 +74,22 @@ REACT_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 
 - ✅ Full Vercel deployment ready
 - ✅ KCB Unified Checkout integration (cards, Google Pay, Apple Pay)
-- ✅ M-Pesa Paybill & Till Number options
+- ✅ Payment success / failed / cancelled result pages
+- ✅ Webhook endpoint for KCB payment notifications (signature-verified)
+- ✅ M-Pesa Paybill & Till Number manual options
 - ✅ WhatsApp floating chat button
 - ✅ EmailJS contact form → uwrcafrica@gmail.com
-- ✅ Facebook link updated
 - ✅ All donation buttons wired to /donate
 
 ---
 
-## File Structure Changes
+## API Endpoints
 
 ```
 api/
-  payment-session.js    # Vercel serverless function — creates KCB session
-  payment-verify.js     # Vercel serverless function — verifies payment
-src/
-  pages/
-    Donate.tsx          # New donation page with KCB + M-Pesa
-  components/
-    WhatsAppFloat.tsx   # Floating WhatsApp button
+  payment-session.js    # Creates the KCB/Cybersource checkout session
+  payment-verify.js     # Processes the transient token after donor pays
+  payment-webhook.js    # Receives KCB payment status notifications
 ```
 
 ---
