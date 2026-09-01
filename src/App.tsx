@@ -22,6 +22,7 @@ import DonationFloat from './components/DonationFloat'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Donate from './pages/Donate'
+import DonationResult from './pages/DonationResult'
 import WhatsAppFloat from './components/WhatsAppFloat'
 
 export default function App() {
@@ -50,6 +51,9 @@ export default function App() {
           <Route path="/blog/pure-religion-widows-orphans" element={<ArticleWidowsOrphansCare />} />
           <Route path="/blog/year-in-review-2025" element={<ArticleYearInReview2025 />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/donate/success" element={<DonationResult status="success" />} />
+          <Route path="/donate/failed" element={<DonationResult status="failed" />} />
+          <Route path="/donate/cancelled" element={<DonationResult status="cancelled" />} />
         </Routes>
       </main>
       <Footer />
