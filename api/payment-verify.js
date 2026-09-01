@@ -1,6 +1,10 @@
 /**
- * KCB Unified Checkout — Verify Payment Result
+ * KCB Unified Checkout — Verify / Process Payment Result
  * Vercel Serverless Function
+ *
+ * Receives the transient token JWT produced by the Unified Checkout SDK
+ * after the donor completes payment, then processes the authorization
+ * via the Cybersource Payments API.
  */
 
 export default async function handler(req, res) {
@@ -16,7 +20,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { transientToken } = req.body || {};
+  const { transientToken, reference } = req.body || {};
 
   if (!transientToken) {
     return res.status(400).json({ error: 'Transient token is required' });
@@ -43,10 +47,10 @@ export default async function handler(req, res) {
 
     const requestBody = JSON.stringify({
       clientReferenceInformation: {
-        code: 'donation-verify'
+        code: reference || `UWK-${Date.now()}`
       },
-      paymentInformation: {
-        transientToken: transientToken
+      tokenInformation: {
+        transientTokenJwt: transientToken
       }
     });
 
@@ -74,17 +78,21 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(response.status).json({
-        error: 'Payment verification failed',
+        success: false,
+        error: 'Payment authorization failed',
         details: data
       });
     }
 
+    const authorized = data.status === 'AUTHORIZED' || data.status === 'PENDING';
+
     return res.status(200).json({
-      success: true,
+      success: authorized,
       status: data.status,
       amount: data.orderInformation?.amountDetails?.totalAmount,
       currency: data.orderInformation?.amountDetails?.currency,
-      transactionId: data.id
+      transactionId: data.id,
+      reconciliationId: data.reconciliationId
     });
 
   } catch (err) {
