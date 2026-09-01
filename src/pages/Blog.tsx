@@ -10,6 +10,15 @@ const categories = ['All', 'Education', 'Empowerment', 'Healthcare', 'Community'
 
 const articles = [
   {
+    id: 15,
+    tag: 'Community',
+    title: 'A Place of Refuge — Inside the Ultimate Wings Rescue Center',
+    excerpt: 'Orphans rescued from danger, widows rebuilding through goats, bees, and gardens, children placed in competitive schools — step inside the haven where weary souls find shelter.',
+    meta: 'September 1, 2026 • 8 min read',
+    image: '/images/rescue-center-hero.jpg',
+    slug: '/blog/ultimate-wings-rescue-center',
+  },
+  {
     id: 13,
     tag: 'Community',
     title: 'Pure Religion: Caring for Widows and Orphans',
@@ -201,22 +210,22 @@ export default function Blog() {
           <div className="bg-white rounded-2xl overflow-hidden shadow-card flex flex-col lg:flex-row">
             <div className="lg:w-1/2">
               <img
-                src="/images/widows-orphans-team.jpg"
-                alt="Pure Religion: Caring for Widows and Orphans"
+                src="/images/rescue-center-hero.jpg"
+                alt="A Place of Refuge — Inside the Ultimate Wings Rescue Center"
                 className="w-full h-full object-cover min-h-[300px] lg:min-h-[400px]"
               />
             </div>
             <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
               <span className="text-label text-golden-hour tracking-[0.15em]">FEATURED STORY</span>
               <h2 className="font-display font-bold text-deep-forest mt-4 leading-tight" style={{ fontSize: 'clamp(28px, 3vw, 40px)' }}>
-                Pure Religion: Caring for Widows and Orphans
+                A Place of Refuge — Inside the Ultimate Wings Rescue Center
               </h2>
               <p className="text-off-black/70 mt-4 leading-relaxed">
-                Scripture is clear — pure religion looks after orphans and widows in their distress. Discover the four practical pillars through which Ultimate Wings turns that calling into school meals, skills training, mentorship, and restored dignity.
+                Orphans rescued from danger, widows rebuilding their lives through dairy goats, beekeeping, and kitchen gardens, children placed in competitive schools — step inside the haven where weary souls find shelter and dignity is restored.
               </p>
-              <span className="text-muted-sage text-sm mt-4">August 12, 2026 &bull; 9 min read</span>
+              <span className="text-muted-sage text-sm mt-4">September 1, 2026 &bull; 8 min read</span>
               <Link
-                to="/blog/pure-religion-widows-orphans"
+                to="/blog/ultimate-wings-rescue-center"
                 className="link-arrow text-deep-forest hover:text-golden-hour font-bold underline underline-offset-4 mt-6 inline-flex"
               >
                 Read Full Story <ArrowRight size={16} />
@@ -322,7 +331,7 @@ export default function Blog() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-            <Link to="/contact" className="btn-primary text-sm py-3 px-8">
+            <Link to="/donate" className="btn-primary text-sm py-3 px-8">
               Donate Now
             </Link>
             <Link
