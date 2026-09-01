@@ -17,6 +17,7 @@ import ArticleSainabuHome from './pages/articles/ArticleSainabuHome'
 import ArticleYearInReview2025 from './pages/articles/ArticleYearInReview2025'
 import ArticleWidowsOrphansCare from './pages/articles/ArticleWidowsOrphansCare'
 import ArticleOscarNyaanga from './pages/articles/ArticleOscarNyaanga'
+import ArticleRescueCenter from './pages/articles/ArticleRescueCenter'
 import ScrollToTop from './components/ScrollToTop'
 import DonationFloat from './components/DonationFloat'
 import Navbar from './components/Navbar'
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/blog/oscar-nyaanga" element={<ArticleOscarNyaanga />} />
           <Route path="/blog/pure-religion-widows-orphans" element={<ArticleWidowsOrphansCare />} />
           <Route path="/blog/year-in-review-2025" element={<ArticleYearInReview2025 />} />
+          <Route path="/blog/ultimate-wings-rescue-center" element={<ArticleRescueCenter />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/donate/success" element={<DonationResult status="success" />} />
           <Route path="/donate/failed" element={<DonationResult status="failed" />} />
