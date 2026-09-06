@@ -93,8 +93,35 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h3 className="font-body font-bold text-deep-forest text-lg mb-5">Reach Us Directly</h3>
+              <h3 className="font-body font-bold text-deep-forest text-lg mb-5">Contact</h3>
               <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin size={18} className="text-deep-forest" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-deep-forest/60">Address</div>
+                    <div className="font-medium text-deep-forest">P O Box 28, 80202<br />Watamu, Kenya</div>
+                  </div>
+                </div>
+                <a href="tel:+254742287771" className="flex items-start gap-3 group">
+                  <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
+                    <Phone size={18} className="text-deep-forest" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-deep-forest/60">Tel</div>
+                    <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">+254742287771</div>
+                  </div>
+                </a>
+                <a href="https://wa.me/254742287771" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 group">
+                  <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
+                    <MessageCircle size={18} className="text-deep-forest" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-deep-forest/60">WhatsApp</div>
+                    <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">+254742287771</div>
+                  </div>
+                </a>
                 <a href="mailto:uwrcafrica@gmail.com" className="flex items-start gap-3 group">
                   <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
                     <Mail size={18} className="text-deep-forest" />
@@ -104,33 +131,15 @@ export default function Contact() {
                     <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">uwrcafrica@gmail.com</div>
                   </div>
                 </a>
-                <a href="mailto:info@ultimatewingskenya.org" className="flex items-start gap-3 group">
+                <a href="mailto:info@ultimatewings.co.ke" className="flex items-start gap-3 group">
                   <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
                     <Mail size={18} className="text-deep-forest" />
                   </div>
                   <div>
-                    <div className="text-xs text-deep-forest/60">Alternative Email</div>
-                    <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">info@ultimatewingskenya.org</div>
+                    <div className="text-xs text-deep-forest/60">Email</div>
+                    <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">info@ultimatewings.co.ke</div>
                   </div>
                 </a>
-                <a href="tel:+254700000000" className="flex items-start gap-3 group">
-                  <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
-                    <Phone size={18} className="text-deep-forest" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-deep-forest/60">Phone</div>
-                    <div className="font-medium text-deep-forest group-hover:text-golden-hour transition-colors">+254 700 000 000</div>
-                  </div>
-                </a>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-deep-forest/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin size={18} className="text-deep-forest" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-deep-forest/60">Location</div>
-                    <div className="font-medium text-deep-forest">Watamu, Kilifi County, Kenya</div>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -223,7 +232,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-golden-hour focus:outline-none text-deep-forest"
-                        placeholder="+254 700 000 000"
+                        placeholder="+254742287771"
                       />
                     </div>
                     <div>

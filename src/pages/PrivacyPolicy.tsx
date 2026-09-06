@@ -156,9 +156,11 @@ export default function PrivacyPolicy() {
                 If you have any questions about this Privacy Policy or our data practices, please contact our Data Protection Officer:
               </p>
               <p className="leading-relaxed mb-4">
+                <strong>Address:</strong> P O Box 28, 80202, Watamu, Kenya<br />
+                <strong>Tel:</strong> <a href="tel:+254742287771" className="text-golden-hour hover:underline">+254742287771</a><br />
+                <strong>WhatsApp:</strong> <a href="https://wa.me/254742287771" target="_blank" rel="noopener noreferrer" className="text-golden-hour hover:underline">+254742287771</a><br />
+                <strong>Email:</strong> <a href="mailto:uwrcafrica@gmail.com" className="text-golden-hour hover:underline">uwrcafrica@gmail.com</a><br />
                 <strong>Email:</strong> <a href="mailto:info@ultimatewings.co.ke" className="text-golden-hour hover:underline">info@ultimatewings.co.ke</a><br />
-                <strong>Phone:</strong> <a href="tel:+254742287771" className="text-golden-hour hover:underline">+254 742 287 771</a><br />
-                <strong>Address:</strong> P.O. Box 28, 80202, Watamu, Kenya<br />
                 <strong>Data Protection Officer:</strong> Ultimate Wings Kenya Administration
               </p>
               <p className="leading-relaxed mb-4">

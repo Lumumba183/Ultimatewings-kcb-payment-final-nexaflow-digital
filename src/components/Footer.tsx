@@ -128,19 +128,23 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-teal-accent mt-0.5 flex-shrink-0" />
-                <span className="text-cream-white/60 text-sm">P.O. Box 28, 80202<br />Watamu, Kilifi County<br />Republic of Kenya</span>
+                <span className="text-cream-white/60 text-sm">P O Box 28, 80202<br />Watamu, Kenya</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={18} className="text-teal-accent flex-shrink-0" />
-                <a href="tel:+254742287771" className="text-golden-hour text-sm hover:underline">+254 742 287 771</a>
+                <a href="tel:+254742287771" className="text-golden-hour text-sm hover:underline">Tel: +254742287771</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={18} className="text-teal-accent flex-shrink-0" />
-                <a href="mailto:info@ultimatewings.co.ke" className="text-golden-hour text-sm hover:underline">info@ultimatewings.co.ke</a>
+                <a href="https://wa.me/254742287771" target="_blank" rel="noopener noreferrer" className="text-golden-hour text-sm hover:underline">WhatsApp: +254742287771</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={18} className="text-teal-accent flex-shrink-0" />
                 <a href="mailto:uwrcafrica@gmail.com" className="text-golden-hour text-sm hover:underline">uwrcafrica@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-teal-accent flex-shrink-0" />
+                <a href="mailto:info@ultimatewings.co.ke" className="text-golden-hour text-sm hover:underline">info@ultimatewings.co.ke</a>
               </div>
             </div>
           </div>
