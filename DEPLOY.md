@@ -13,13 +13,13 @@ Add these in Vercel Project Settings → Environment Variables:
 
 #### Site
 ```
-SITE_URL=https://your-domain.or.ke    # Public origin, used as Cybersource targetOrigin
+SITE_URL=https://ultimatewings.co.ke    # Public origin, used as Cybersource targetOrigin
 ```
 
 #### KCB Payment Gateway (Required for card payments)
 Server-side (used by the /api functions):
 ```
-KCB_MERCHANT_ID=your_kcb_merchant_id
+KCB_MERCHANT_ID=ultimatewingskenya_ke
 KCB_API_KEY=your_kcb_api_key
 KCB_API_SECRET=your_kcb_api_secret
 KCB_ENV=test          # Change to 'production' when going live
@@ -51,20 +51,36 @@ VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 5. Copy Service ID, Template ID, and Public Key to Vercel env vars
 
 ### 4. KCB Setup
-1. Get Merchant ID, API Key, and API Secret from KCB bank
-2. Add them to Vercel environment variables (server-side AND `VITE_KCB_ENV`)
-3. Test in test environment first (`KCB_ENV=test`, `VITE_KCB_ENV=test`)
-4. Register the webhook URL with KCB: `https://your-domain/api/payment-webhook`
-5. Switch to production when ready (`KCB_ENV=production`, `VITE_KCB_ENV=production`) and redeploy
+1. Get the **API Key** and **API Secret** from KCB (merchant ID is already `ultimatewingskenya_ke`).
+2. Add them to Vercel environment variables (server-side AND `VITE_KCB_ENV`).
+3. Test in the test environment first (`KCB_ENV=test`, `VITE_KCB_ENV=test`).
+4. Register the webhook URL with KCB: `https://ultimatewings.co.ke/api/payment-webhook`.
+5. Switch to production when ready (`KCB_ENV=production`, `VITE_KCB_ENV=production`) and redeploy.
 
-### 5. Important: URL Format
+### 5. KCB Test Cards (Cybersource Unified Checkout)
+Use these test cards in the checkout widget:
+| Card Brand | Card Number | Expiration | CVV |
+|------------|-------------|------------|-----|
+| Visa | 4111111111111111 | 12/2026 | 123 |
+| Mastercard | 5555555555554444 | 02/2026 | 265 |
+| American Express | 378282246310005 | 03/2026 | 7890 |
+
+More test data: https://developer.cybersource.com/docs/cybs/en-us/unified-checkout/developer/all/rest/unified-checkout/uc-reference-test-cards.html
+
+### 6. KCB Integration Details
+- Sessions API: `POST https://apitest.cybersource.com/uc/v1/sessions` (test) / `https://api.cybersource.com/uc/v1/sessions` (prod)
+- Payment authorization: `POST /pts/v2/payments` with `tokenInformation.transientTokenJwt`
+- Payment Details API: `GET /flex/v2/payment-details/{jti}` where `{jti}` is the `jti` claim inside the transient token JWT
+- Sample integration: https://github.com/cybersource/cybersource-unified-checkout-sample-node
+
+### 7. Important: URL Format
 This app uses HashRouter — all page URLs contain `/#/`:
-- Donation page: `https://your-domain/#/donate`
-- Success page: `https://your-domain/#/donate/success`
-- Failed page: `https://your-domain/#/donate/failed`
+- Donation page: `https://ultimatewings.co.ke/#/donate`
+- Success page: `https://ultimatewings.co.ke/#/donate/success`
+- Failed page: `https://ultimatewings.co.ke/#/donate/failed`
 Give these exact formats to KCB when registering redirect URLs.
 
-### 6. Custom Domain (Optional)
+### 8. Custom Domain (Optional)
 1. In Vercel project settings, add your domain
 2. Update DNS records as instructed by Vercel (add A + CNAME records; never change nameservers)
 
@@ -73,7 +89,7 @@ Give these exact formats to KCB when registering redirect URLs.
 ## Features
 
 - ✅ Full Vercel deployment ready
-- ✅ KCB Unified Checkout integration (cards, Google Pay, Apple Pay)
+- ✅ KCB Unified Checkout v1 integration (cards, Google Pay, Apple Pay)
 - ✅ Payment success / failed / cancelled result pages
 - ✅ Webhook endpoint for KCB payment notifications (signature-verified)
 - ✅ M-Pesa Paybill & Till Number manual options
@@ -87,8 +103,8 @@ Give these exact formats to KCB when registering redirect URLs.
 
 ```
 api/
-  payment-session.js    # Creates the KCB/Cybersource checkout session
-  payment-verify.js     # Processes the transient token after donor pays
+  payment-session.js    # Creates the KCB/Cybersource checkout session (POST /uc/v1/sessions)
+  payment-verify.js     # Verifies the transient token, fetches payment details, authorizes the payment
   payment-webhook.js    # Receives KCB payment status notifications
 ```
 

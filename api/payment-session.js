@@ -1,6 +1,10 @@
 /**
  * KCB Unified Checkout — Create Payment Session
  * Vercel Serverless Function
+ *
+ * Server-to-server call to the Cybersource Unified Checkout v1 Sessions API
+ * (POST /uc/v1/sessions). Returns a signed capture-context JWT that the
+ * browser uses to initialize the Unified Checkout SDK.
  */
 
 export default async function handler(req, res) {
@@ -22,6 +26,9 @@ export default async function handler(req, res) {
   if (!amount || isNaN(Number(amount))) {
     return res.status(400).json({ error: 'Valid amount is required' });
   }
+
+  // Normalize the amount to a two-decimal string for the Sessions API.
+  const totalAmount = Number(amount).toFixed(2);
 
   // Check if KCB credentials are configured
   const MERCHANT_ID = process.env.KCB_MERCHANT_ID;
@@ -57,21 +64,29 @@ export default async function handler(req, res) {
 
     const payload = {
       targetOrigins: [siteOrigin],
-      clientVersion: '1.0',
       locale: 'en_KE',
       country: 'KE',
-      orderInformation: {
-        amountDetails: {
-          totalAmount: String(amount),
-          currency: currency
-        },
-        billTo: {
-          country: 'KE'
-        }
+      allowedCardNetworks: ['VISA', 'MASTERCARD'],
+      allowedPaymentTypes: ['PANENTRY'],
+      captureMandate: {
+        billingType: 'FULL',
+        requestEmail: true,
+        requestPhone: true,
+        requestShipping: false,
+        showAcceptedNetworkIcons: true
       },
-      paymentInformation: {
-        paymentType: {
-          type: 'CARD'
+      completeMandate: {
+        type: 'AUTH'
+      },
+      data: {
+        orderInformation: {
+          amountDetails: {
+            totalAmount: totalAmount,
+            currency: currency
+          },
+          billTo: {
+            country: 'KE'
+          }
         }
       }
     };
@@ -80,15 +95,16 @@ export default async function handler(req, res) {
     const digest = createHash('sha256').update(requestBody).digest('base64');
 
     const gmtDate = new Date().toUTCString();
-    const signString = `host: ${isTest ? 'apitest.cybersource.com' : 'api.cybersource.com'}\ndate: ${gmtDate}\n(request-target): post /up/v1/sessions\ndigest: SHA-256=${digest}\nv-c-merchant-id: ${MERCHANT_ID}`;
+    const host = isTest ? 'apitest.cybersource.com' : 'api.cybersource.com';
+    const signString = `host: ${host}\ndate: ${gmtDate}\n(request-target): post /uc/v1/sessions\ndigest: SHA-256=${digest}\nv-c-merchant-id: ${MERCHANT_ID}`;
     const signature = createHmac('sha256', API_SECRET).update(signString).digest('base64');
 
     const authHeader = `keyid="${API_KEY}", algorithm="HmacSHA256", headers="host date (request-target) digest v-c-merchant-id", signature="${signature}"`;
 
-    const response = await fetch(`${baseUrl}/up/v1/sessions`, {
+    const response = await fetch(`${baseUrl}/uc/v1/sessions`, {
       method: 'POST',
       headers: {
-        'Host': isTest ? 'apitest.cybersource.com' : 'api.cybersource.com',
+        'Host': host,
         'Date': gmtDate,
         'Digest': `SHA-256=${digest}`,
         'v-c-merchant-id': MERCHANT_ID,
@@ -106,11 +122,12 @@ export default async function handler(req, res) {
       });
     }
 
-    const data = await response.json();
+    // The Sessions API returns the capture-context JWT directly as text.
+    const sessionJWT = await response.text();
     return res.status(200).json({
       success: true,
-      sessionJWT: data.captureContext,
-      status: data.status || 'created'
+      sessionJWT: sessionJWT,
+      status: 'created'
     });
 
   } catch (err) {

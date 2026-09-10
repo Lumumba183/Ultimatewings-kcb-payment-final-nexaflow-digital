@@ -107,7 +107,7 @@ export default function Donate() {
       script.onload = async () => {
         try {
           const client = await (window as any).VAS.UnifiedCheckout(data.sessionJWT)
-          const checkout = await client.createCheckout({ autoProcessing: true })
+          const checkout = await client.createCheckout({ autoProcessing: false })
           const result = await checkout.mount('#kcb-payment-container')
 
           // Process the transient token server-side — this is where the
@@ -310,7 +310,7 @@ export default function Donate() {
                   <button
                     onClick={() => copyToClipboard('9700052', 'till')}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-100 text-blue-700 text-sm hover:bg-blue-200 transition-colors"
-                  >
+                    >
                     {copiedField === 'till' ? <Check size={14} /> : <Copy size={14} />}
                     {copiedField === 'till' ? 'Copied' : 'Copy'}
                   </button>
