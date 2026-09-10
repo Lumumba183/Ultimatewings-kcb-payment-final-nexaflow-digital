@@ -78,15 +78,14 @@ export default async function handler(req, res) {
       completeMandate: {
         // Per KCB recommendation (10 Sep 2026): ensure the client app is
         // recognized as Unified Checkout and that all transaction legs of a
-        // fully authenticated flow are visible. Keep AUTH (no forced 3DS
-        // challenge popup for donors) but enable frictionless 3DS so the
-        // consumerAuthenticationInformation leg appears in the payment
-        // response and in the bank's transaction logs.
+        // fully authenticated flow are visible in the bank's logs.
+        // consumerAuthentication: '3DS' runs Payer Authentication as part of
+        // the complete mandate, so the consumerAuthenticationInformation leg
+        // appears on every transaction. AUTH flow and donor experience are
+        // unchanged (3DS challenges only when the issuer requires it).
         type: 'AUTH',
-        requestCardHolderName: true,
-        enablePayerAuthentication: true,
-        enable3ds: true,
-        challengeCode: '04'
+        consumerAuthentication: '3DS',
+        decisionManager: true
       },
       data: {
         orderInformation: {
