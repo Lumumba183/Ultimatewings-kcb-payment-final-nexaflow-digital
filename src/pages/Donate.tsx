@@ -6,7 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Unified Checkout SDK: test vs production asset URL.
+// Unified Checkout SDK: test vs production asset URL (fallback only — the
+// session API returns the exact versioned clientLibrary URL from Cybersource).
 // Controlled by VITE_KCB_ENV in Vercel env vars — defaults to test.
 const KCB_SDK_URL = import.meta.env.VITE_KCB_ENV === 'production'
   ? 'https://api.cybersource.com/uc/v1/assets/1.0.0/UnifiedCheckout.js'
@@ -97,9 +98,15 @@ export default function Donate() {
       setKcbConfigured(true)
       setShowKcbModal(true)
 
-      // Load KCB Unified Checkout SDK (test or production asset per VITE_KCB_ENV)
+      // Load KCB Unified Checkout SDK. Prefer the exact versioned asset URL
+      // returned inside the capture-context JWT (clientLibrary), falling back
+      // to the env-based test/production URL.
       const script = document.createElement('script')
-      script.src = KCB_SDK_URL
+      script.src = data.clientLibrary || KCB_SDK_URL
+      if (data.clientLibrary && data.clientLibraryIntegrity) {
+        script.integrity = data.clientLibraryIntegrity
+        script.crossOrigin = 'anonymous'
+      }
       script.onerror = () => {
         setKcbError('Could not load the KCB checkout library. Please check your connection and try again.')
         setShowKcbModal(false)

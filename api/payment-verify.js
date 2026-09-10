@@ -114,7 +114,9 @@ function buildHttpSignature({ method, host, path, body, merchantId, apiKey, apiS
     headers['Digest'] = `SHA-256=${digest}`;
   }
   signString += `\nv-c-merchant-id: ${merchantId}`;
-  const signature = createHmac('sha256', apiSecret).update(signString).digest('base64');
+  // Cybersource shared secrets are base64-encoded and must be decoded
+  // to raw bytes before HMAC — using the base64 string directly fails auth.
+  const signature = createHmac('sha256', Buffer.from(apiSecret, 'base64')).update(signString).digest('base64');
   headers['Signature'] = `keyid="${apiKey}", algorithm="HmacSHA256", headers="host date (request-target)${body !== undefined ? ' digest' : ''} v-c-merchant-id", signature="${signature}"`;
   return headers;
 }

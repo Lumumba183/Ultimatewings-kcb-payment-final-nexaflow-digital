@@ -17,11 +17,14 @@ SITE_URL=https://ultimatewings.co.ke    # Public origin, used as Cybersource tar
 ```
 
 #### KCB Payment Gateway (Required for card payments)
-Server-side (used by the /api functions):
+Server-side (used by the /api functions). Generate a REST API key in the Cybersource
+Business Center (test) — the download is a `.pem` file containing the Key ID and the
+base64 Shared Secret. Paste them exactly as shown; the server code base64-decodes the
+secret before HMAC signing.
 ```
 KCB_MERCHANT_ID=ultimatewingskenya_ke
-KCB_API_KEY=your_kcb_api_key
-KCB_API_SECRET=your_kcb_api_secret
+KCB_API_KEY=your_key_id_from_the_pem_file
+KCB_API_SECRET=your_base64_shared_secret_from_the_pem_file
 KCB_ENV=test          # Change to 'production' when going live
 ```
 Client-side (selects the test vs production Unified Checkout SDK in the browser):

@@ -97,7 +97,9 @@ export default async function handler(req, res) {
     const gmtDate = new Date().toUTCString();
     const host = isTest ? 'apitest.cybersource.com' : 'api.cybersource.com';
     const signString = `host: ${host}\ndate: ${gmtDate}\n(request-target): post /uc/v1/sessions\ndigest: SHA-256=${digest}\nv-c-merchant-id: ${MERCHANT_ID}`;
-    const signature = createHmac('sha256', API_SECRET).update(signString).digest('base64');
+    // Cybersource shared secrets are base64-encoded and must be decoded
+    // to raw bytes before HMAC — using the base64 string directly fails auth.
+    const signature = createHmac('sha256', Buffer.from(API_SECRET, 'base64')).update(signString).digest('base64');
 
     const authHeader = `keyid="${API_KEY}", algorithm="HmacSHA256", headers="host date (request-target) digest v-c-merchant-id", signature="${signature}"`;
 
@@ -124,9 +126,30 @@ export default async function handler(req, res) {
 
     // The Sessions API returns the capture-context JWT directly as text.
     const sessionJWT = await response.text();
+
+    // Decode the capture context to surface the exact SDK asset URL the
+    // browser must load (versioned + integrity-pinned by Cybersource).
+    let clientLibrary = null;
+    let clientLibraryIntegrity = null;
+    try {
+      const parts = sessionJWT.split('.');
+      if (parts.length === 3) {
+        const ctxPayload = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf8'));
+        const ctxData = ctxPayload && ctxPayload.ctx && ctxPayload.ctx[0] && ctxPayload.ctx[0].data;
+        if (ctxData) {
+          clientLibrary = ctxData.clientLibrary || null;
+          clientLibraryIntegrity = ctxData.clientLibraryIntegrity || null;
+        }
+      }
+    } catch (decodeErr) {
+      console.warn('Could not decode capture context JWT for clientLibrary:', decodeErr.message);
+    }
+
     return res.status(200).json({
       success: true,
       sessionJWT: sessionJWT,
+      clientLibrary: clientLibrary,
+      clientLibraryIntegrity: clientLibraryIntegrity,
       status: 'created'
     });
 
