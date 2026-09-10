@@ -2,17 +2,18 @@
  * KCB Unified Checkout — Verify / Process Payment Result
  * Vercel Serverless Function
  *
- * Receives the Unified Checkout transient token (or auto-processed payment
- * result JWT) produced by the browser SDK, verifies its RS256 signature
- * against Cybersource's published public key, then processes the
- * authorization via POST /pts/v2/payments.
+ * Receives the Unified Checkout transient token produced by the browser SDK,
+ * verifies its RS256 signature against Cybersource's published public key,
+ * then processes the authorization via POST /pts/v2/payments.
  *
  * The token's `jti` claim is also used to call the Payment Details API
  * (GET /flex/v2/payment-details/{jti}) to retrieve non-sensitive
  * cardholder / billing / shipping data for logging and reconciliation.
  */
 
-const https = require('https');
+import https from 'https';
+import { createHash, createHmac, createPublicKey } from 'crypto';
+import jwt from 'jsonwebtoken';
 
 const ALLOWED_JWT_ALG = 'RS256';
 const JWK_CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
@@ -63,7 +64,7 @@ function fetchJson(host, path) {
 }
 
 function jwkToPem(jwk) {
-  const key = require('crypto').createPublicKey({ key: jwk, format: 'jwk' });
+  const key = createPublicKey({ key: jwk, format: 'jwk' });
   return key.export({ type: 'spki', format: 'pem' });
 }
 
@@ -86,7 +87,7 @@ async function getCybersourcePublicKey(host, kid) {
 }
 
 async function verifyCybersourceJwt(token, host) {
-  const { header, payload } = decodeJwt(token);
+  const { header } = decodeJwt(token);
   if (!header || header.alg !== ALLOWED_JWT_ALG) {
     throw new Error(`Unexpected JWT algorithm: ${header && header.alg}`);
   }
@@ -94,13 +95,11 @@ async function verifyCybersourceJwt(token, host) {
     throw new Error('Missing JWT key id');
   }
   const publicKey = await getCybersourcePublicKey(host, header.kid);
-  const jwt = require('jsonwebtoken');
   const verified = jwt.verify(token, publicKey, { algorithms: [ALLOWED_JWT_ALG] });
   return { payload: verified, header };
 }
 
 function buildHttpSignature({ method, host, path, body, merchantId, apiKey, apiSecret }) {
-  const { createHash, createHmac } = require('crypto');
   const gmtDate = new Date().toUTCString();
   let signString = `host: ${host}\ndate: ${gmtDate}\n(request-target): ${method.toLowerCase()} ${path}`;
   const headers = {
