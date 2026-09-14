@@ -6,6 +6,12 @@
  * verifies its RS256 signature against Cybersource's published public key,
  * then processes the authorization via POST /pts/v2/payments.
  *
+ * Per KCB integration-team guidance (14 Sep 2026), the payment request also
+ * invokes Decision Manager (riskInformation.profile.name = "default") with
+ * processingInformation.commerceIndicator = "internet", and an explicit
+ * capture (POST /pts/v2/payments/{id}/captures) follows every successful
+ * authorization so the settlement leg appears on the transaction.
+ *
  * The token's `jti` claim is also used to call the Payment Details API
  * (GET /flex/v2/payment-details/{jti}) to retrieve non-sensitive
  * cardholder / billing / shipping data for logging and reconciliation.
@@ -200,11 +206,22 @@ export default async function handler(req, res) {
       }
     }
 
-    // 3. Authorize / capture the payment using the transient token.
+    // 3. Authorize the payment using the transient token.
+    //    Per KCB guidance (14 Sep 2026): invoke Decision Manager with the
+    //    default risk profile and flag the transaction as an internet
+    //    (e-commerce) transaction so the Decision Manager leg is recorded.
     const referenceCode = reference || `UWK-${Date.now()}`;
     const paymentBody = JSON.stringify({
       clientReferenceInformation: {
         code: referenceCode
+      },
+      processingInformation: {
+        commerceIndicator: 'internet'
+      },
+      riskInformation: {
+        profile: {
+          name: 'default'
+        }
       },
       tokenInformation: {
         transientTokenJwt: transientToken
@@ -232,11 +249,54 @@ export default async function handler(req, res) {
     const data = paymentResult.data;
     const authorized = data.status === 'AUTHORIZED' || data.status === 'PENDING';
 
+    // 4. Explicitly capture the authorization so the settlement leg is
+    //    recorded on the transaction (per KCB guidance: settlement only
+    //    happens after an explicit capture call). A capture failure is
+    //    logged but never turns an authorized donation into a failure —
+    //    captures can be retried from the Business Center.
+    let capture = { attempted: false, success: false, id: null, status: null };
+    if (authorized && data.id) {
+      capture.attempted = true;
+      try {
+        const captureBody = JSON.stringify({
+          clientReferenceInformation: {
+            code: referenceCode
+          },
+          orderInformation: {
+            amountDetails: {
+              totalAmount: data.orderInformation?.amountDetails?.totalAmount,
+              currency: data.orderInformation?.amountDetails?.currency || 'KES'
+            }
+          }
+        });
+        const captureResult = await cybersourceRequest({
+          method: 'POST',
+          host,
+          path: `/pts/v2/payments/${data.id}/captures`,
+          body: captureBody,
+          merchantId: MERCHANT_ID,
+          apiKey: API_KEY,
+          apiSecret: API_SECRET
+        });
+        if (captureResult.ok) {
+          capture.success = true;
+          capture.id = captureResult.data.id || null;
+          capture.status = captureResult.data.status || null;
+        } else {
+          console.warn('Capture call returned', captureResult.status, captureResult.data);
+        }
+      } catch (captureErr) {
+        console.warn('Capture call failed:', captureErr.message);
+      }
+    }
+
     // Log a safe, non-sensitive summary for reconciliation.
     console.log('KCB payment processed:', JSON.stringify({
       reference: referenceCode,
       status: data.status,
       transactionId: data.id,
+      captureId: capture.id,
+      captureStatus: capture.status,
       jti: jti || null,
       cardholderName: paymentDetails?.cardholderName || null,
       email: paymentDetails?.billTo?.email || null
@@ -250,6 +310,7 @@ export default async function handler(req, res) {
       transactionId: data.id,
       reconciliationId: data.reconciliationId,
       reference: referenceCode,
+      capture: capture,
       paymentDetails: paymentDetails
         ? {
             cardholderName: paymentDetails.cardholderName || null,
